@@ -1,0 +1,25 @@
+{
+	"exp_name": "performance on short sequences",
+	"gpu": "3",
+	"u_net_d": 10,
+	"BATCH_SIZE": 1,
+	"batch_size_stage_1": 1,
+	"batch_size_stage_2": 1,
+	"OUT_STEP": 100,
+	"LOAD_MODEL": true,
+	"rho_per_position": "matrix",
+	"data_type": "rnastralign_all_600",
+	"model_type": "pretrained",
+	"epoches_first": 100, 
+	"epoches_second": 10,
+	"epoches_third": 10,
+	"evaluate_epi": 3,
+	"evaluate_epi_stage_1": 10,
+	"step_gamma": 1,
+	"k": 1,
+	"test": {
+		"f1": true,
+		"accuracy": false,
+		"energy": false
+	}
+}
