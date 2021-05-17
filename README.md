@@ -21,8 +21,14 @@ For many RNA molecules, the secondary structure is essential for the correct fun
 ### Recommended
 We recommend users use our [UFold webserver](https://ufold.ics.uci.edu), which is user-friendly and easy to use. Everyone could upload or typein your own candidate RNA sequence in our web without further installation, our backend server will calculate and give the prediction result to the user. User can choose to download the predict ct file result as well as visualize them online directly.
 
+### Data generator
+You can put their bpseq formatted files in their own directory and specify it in this process by running:
+<pre><code>$ python process_data_newdataset.py your_own_directory_containing_bpseq_files
+</code></pre> 
+After that you will get a pickle file format, which is compatible with our model.
+
 ### Training
-You can train our model using pre-defined data, or use our customed data generate script to generate your own data. After that, you can run the model training script:
+You can train our model using pre-defined data, or use our customed data generate script to generate your own data(Mentioned before). After that, you can run the model training script:
 <pre><code>$ python ufold_train.py
 </code></pre> 
 
