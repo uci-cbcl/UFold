@@ -11,6 +11,10 @@ For many RNA molecules, the secondary structure is essential for the correct fun
 
 --[munch](https://pypi.org/project/munch/2.0.2/)
 
+--[subprocess](https://docs.python.org/3/library/subprocess.html)
+
+--[collections](https://docs.python.org/2.7/library/collections.html#)
+
 
 ## Usage
 
