@@ -1,4 +1,4 @@
-<img src='https://github.com/uci-cbcl/UFold/blob/main/ufold/UFold_logonew.png' width=400 height=400>
+<img src='https://github.com/uci-cbcl/UFold/blob/main/ufold/UFold_logonew.png' width=350 height=200>
 
 
 ## UFold: Fast and Accurate RNA Secondary Structure Prediction with Deep Learning
