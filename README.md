@@ -37,7 +37,7 @@ conda activate UFold
 
 ## Pre-trained models 
 
-Pre-trained models are deposited in our [drive](). Please download them and put them into models folder.
+Pre-trained models are deposited in our [drive](). Please download them and put them into [models folder](https://github.com/uci-cbcl/UFold/tree/main/models).
 
 ## Usage
 
