@@ -1,4 +1,4 @@
-name: py36
+name: UFold
 channels:
   - pytorch
   - nvidia
@@ -55,4 +55,4 @@ dependencies:
     - requests==2.26.0
     - urllib3==1.26.6
     - yarg==0.1.9
-prefix: /data0/fly/miniconda3/envs/py36
+prefix: /data0/fly/miniconda3/envs/UFold
