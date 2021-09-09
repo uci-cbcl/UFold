@@ -14,6 +14,8 @@ import pdb
 import math
 
 perm = list(product(np.arange(4), np.arange(4)))
+perm2 = [[1,3],[3,1]]
+perm_nc = [[0, 0], [0, 2], [0, 3], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2], [3, 0], [3, 3]]
 
         
 class RNASSDataGenerator(object):
@@ -163,13 +165,24 @@ class RNASSDataGenerator(object):
         yield contact, data_seq, matrix_rep
 
     def get_one_sample(self, index):
-
-        # This will return a smaller size if not sufficient
-        # The user must pad the batch in an external API
-        # Or write a TF module with variable batch size
         data_y = self.data_y[index]
         data_seq = self.data_x[index]
+	#data_len = np.nonzero(self.data_x[index].sum(axis=2))[0].max()
         data_len = self.seq_length[index]
+        data_pair = self.pairs[index]
+        data_name = self.data_name[index]
+
+        contact= self.pairs2map(data_pair)
+        matrix_rep = np.zeros(contact.shape)
+        return contact, data_seq, matrix_rep, data_len, data_name
+
+    def get_one_sample_long(self, index):
+        data_y = self.data_y[index]
+        data_seq = self.data_x[index]
+        #pdb.set_trace()
+        #print(data_seq.shape)
+        data_len = np.nonzero(self.data_x[index].sum(axis=1))[0].max()
+        #data_len = self.seq_length[index]
         data_pair = self.pairs[index]
         data_name = self.data_name[index]
 
@@ -697,6 +710,53 @@ class Dataset_Cut_concat_new_merge_two(data.Dataset):
         data_fcn_2 = np.concatenate((data_fcn,data_fcn_1),axis=0) 
         return contact[:l, :l], data_fcn_2, matrix_rep, data_len, data_seq[:l], data_name
 
+class Dataset_Cut_concat_new_canonicle(data.Dataset):
+  'Characterizes a dataset for PyTorch'
+  def __init__(self, data):
+        'Initialization'
+        self.data = data
+
+  def __len__(self):
+        'Denotes the total number of samples'
+        return self.data.len
+
+  def __getitem__(self, index):
+        'Generates one sample of data'
+        # Select sample
+        contact, data_seq, matrix_rep, data_len, data_name = self.data.get_one_sample(index)
+        #contact, data_seq, matrix_rep, data_len, data_name, data_pair = self.data.get_one_sample_addpairs(index)
+        l = get_cut_len(data_len,80)
+        data_fcn = np.zeros((16, l, l))
+        #data_nc = np.zeros((2, l, l))
+        data_nc = np.zeros((10, l, l))
+        feature = np.zeros((8,l,l))
+        if l >= 500:
+            contact_adj = np.zeros((l, l))
+            contact_adj[:data_len, :data_len] = contact[:data_len, :data_len]
+            contact = contact_adj
+            seq_adj = np.zeros((l, 4))
+            seq_adj[:data_len] = data_seq[:data_len]
+            data_seq = seq_adj
+        for n, cord in enumerate(perm):
+            i, j = cord
+            data_fcn[n, :data_len, :data_len] = np.matmul(data_seq[:data_len, i].reshape(-1, 1), data_seq[:data_len, j].reshape(1, -1))
+        for n, cord in enumerate(perm_nc):
+            i, j = cord
+            data_nc[n, :data_len, :data_len] = np.matmul(data_seq[:data_len, i].reshape(-1, 1), data_seq[:data_len, j].reshape(1, -1))
+        data_nc = data_nc.sum(axis=0).astype(np.bool)
+        data_fcn_1 = np.zeros((1,l,l))
+        data_fcn_1[0,:data_len,:data_len] = creatmat(data_seq[:data_len,])
+        #zero_mask = z_mask(data_len)[None, :, :, None]
+        #label_mask = l_mask(data_seq, data_len)
+        #temp = data_seq[None, :data_len, :data_len]
+        #temp = np.tile(temp, (temp.shape[1], 1, 1))
+        #feature[:,:data_len,:data_len] = np.concatenate([temp, np.transpose(temp, [1, 0, 2])], 2).reshape((-1,data_len,data_len))
+        #feature = np.concatenate((data_fcn,feature),axis=0)
+        #return contact[:l, :l], data_fcn, feature, matrix_rep, data_len, data_seq[:l], data_name
+        #return contact[:l, :l], data_fcn, data_fcn, matrix_rep, data_len, data_seq[:l], data_name
+        data_fcn_2 = np.concatenate((data_fcn,data_fcn_1),axis=0)
+        #return contact[:l, :l], data_fcn_2, matrix_rep, data_len, data_seq[:l], data_name, data_nc, data_pair
+        return contact[:l, :l], data_fcn_2, matrix_rep, data_len, data_seq[:l], data_name, data_nc,l
 
 class Dataset_Cut_input(data.Dataset):
   'Characterizes a dataset for PyTorch'
@@ -754,6 +814,39 @@ class Dataset_Cut_long(data.Dataset):
             i, j = cord
             data_fcn[n, :data_len, :data_len] = np.matmul(data_seq[:data_len, i].reshape(-1, 1), data_seq[:data_len, j].reshape(1, -1))
         return contact[:l, :l], data_fcn, matrix_rep, data_len, data_seq[:l], data_name
+
+class Dataset_Cut_long_17dim(data.Dataset):
+  'Characterizes a dataset for PyTorch'
+  def __init__(self, data):
+        'Initialization'
+        self.data = data
+
+  def __len__(self):
+        'Denotes the total number of samples'
+        return self.data.len
+
+  def __getitem__(self, index):
+        'Generates one sample of data'
+        # Select sample
+        contact, data_seq, matrix_rep, data_len, data_name = self.data.get_one_sample_long(index)
+        if data_len > 1500:
+            data_len = 1500
+        l = get_cut_len(data_len,160)
+        data_fcn = np.zeros((16, l, l))
+        if l >= 1800:
+            contact_adj = np.zeros((l, l))
+            contact_adj[:data_len, :data_len] = contact[:data_len, :data_len]
+            contact = contact_adj
+            seq_adj = np.zeros((l, 4))
+            seq_adj[:data_len] = data_seq[:data_len]
+            data_seq = seq_adj
+        for n, cord in enumerate(perm):
+            i, j = cord
+            data_fcn[n, :data_len, :data_len] = np.matmul(data_seq[:data_len, i].reshape(-1, 1), data_seq[:data_len, j].reshape(1, -1))
+        data_fcn_1 = np.zeros((1,l,l))
+        data_fcn_1[0,:data_len,:data_len] = creatmat(data_seq[:data_len,])
+        data_fcn_2 = np.concatenate((data_fcn,data_fcn_1),axis=0)
+        return contact[:l, :l], data_fcn_2, matrix_rep, data_len, data_seq[:l], data_name
 
 def get_cut_len(data_len,set_len):
     l = data_len
