@@ -48,7 +48,7 @@ We recommend users use our [UFold webserver](https://ufold.ics.uci.edu), which i
 You can put their bpseq formatted files in their own directory and specify it in this process by running:
 <pre><code>$ python process_data_newdataset.py your_own_directory_containing_bpseq_files
 </code></pre> 
-After that you will get a pickle file format, which is compatible with our model.
+After that you will get a pickle file format, which is compatible with our model. Then put the data into [data folder](https://github.com/uci-cbcl/UFold/tree/main/data).
 
 ### Training
 You can train our model using pre-defined data, or use our customed data generate script to generate your own data(Mentioned before). After that, you can run the model training script:
