@@ -35,6 +35,9 @@ Activate conda environment.
 conda activate UFold
 ```
 
+## Pre-trained models 
+
+Pre-trained models are deposited in our [drive](). Please download them and put them into models folder.
 
 ## Usage
 
@@ -55,7 +58,7 @@ You can train our model using pre-defined data, or use our customed data generat
 Noted that this script will include all the data for training as default.
 
 ### Evaluating & Predicting
-We provide test script for users to evaluate the prediction result and predict their own sequence using pre-trained model. After generating a suitable format input data, users can predict their own sequences and get ct file as output.
+We provide test script for users to evaluate the prediction result and predict their own sequence using pre-trained model. Users can predict their own sequences and get ct file as output from the webserver. The script is for evaluating the results.
 <pre><code>$ python ufold_test.py --test_files TS2 
 --test_files: optional parameter, set the test set name from one of test sets(['ArchiveII','TS0','bpnew','TS1','TS2','TS3']).
 </code></pre> 
