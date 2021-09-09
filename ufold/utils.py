@@ -55,11 +55,18 @@ def get_args():
         '-c', '--config',
         metavar='C',
         # default='./config.json',
-        default='/data2/darren/experiment/ufold/ufold/config.json',
+        default='ufold/config.json',
         help='The Configuration file'
     )
     argparser.add_argument('--test', type=bool, default=False, 
         help='skip training to test directly.')
+    argparser.add_argument('--nc', type=bool, default=False,
+        help='whether predict non-canonical pairs.')
+    argparser.add_argument('--train_files', type=str, required=False,nargs='+',default=['RNAStralign','ArchiveII','TR0_with_data_augmentation',
+				'TS0','PDB_train','bpnew','TS1','TS2','TS3'],
+        help='training file name list.')
+    argparser.add_argument('--test_files', required=False,nargs='?',default='ArchiveII',choices=['ArchiveII','TS0','bpnew','TS1','TS2','TS3'],
+        help='test file name')
     args = argparser.parse_args()
     return args
 
