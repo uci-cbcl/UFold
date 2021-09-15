@@ -33,7 +33,10 @@ Activate conda environment.
 
 ```
 conda activate UFold
-```
+``` 
+
+### Check if the installation succeed. 
+Please check the [predicting section](https://github.com/uci-cbcl/UFold#evaluating--predicting) to further validate whether the installation is succeeded and the software works as expected.  
 
 ## Pre-trained models 
 
@@ -62,6 +65,9 @@ We provide test script for users to evaluate the prediction result and predict t
 <pre><code>$ python ufold_test.py --test_files TS2 
 --test_files: optional parameter, set the test set name from one of test sets(['ArchiveII','TS0','bpnew','TS1','TS2','TS3']).
 </code></pre> 
+After running the above example, you will genarate the example output as the following shows: 
+<img src='https://github.com/uci-cbcl/UFold/blob/main/ufold/UFold_example_output.png' width=600 height=200>  
+If the above output pops up, then you have succeeded installed our software.  
 
 ## Citation
 
