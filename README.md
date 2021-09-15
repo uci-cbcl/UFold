@@ -65,8 +65,10 @@ We provide test script for users to evaluate the prediction result and predict t
 <pre><code>$ python ufold_test.py --test_files TS2 
 --test_files: optional parameter, set the test set name from one of test sets(['ArchiveII','TS0','bpnew','TS1','TS2','TS3']).
 </code></pre> 
-After running the above example, you will genarate the example output as the following shows: 
+After running the above example, you will genarate the example output as the following shows:   
+
 <img src='https://github.com/uci-cbcl/UFold/blob/main/ufold/UFold_example_output.png' width=390 height=130>  
+
 If the above output pops up, then you have succeeded installed our software.  
 
 ## Citation
