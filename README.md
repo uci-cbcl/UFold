@@ -75,8 +75,9 @@ If the above output pops up, then you have succeeded installed our software.
 
 If you use our tool, please cite our work: 
 
-UFold: Fast and Accurate RNA Secondary Structure Prediction with Deep Learning
+[UFold: Fast and Accurate RNA Secondary Structure Prediction with Deep Learning](https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkab1074/6430845?searchresult=1)
 
-Laiyi Fu*, Yingxin Cao*, Jie Wu, Qinke Peng, Qing Nie, Xiaohui Xie
+Laiyi Fu*, Yingxin Cao*, Jie Wu, Qinke Peng, Qing Nie, Xiaohui Xie, UFold: fast and accurate RNA secondary structure prediction with deep learning, Nucleic Acids Research, 2021;, gkab1074, https://doi.org/10.1093/nar/gkab1074
 
-bioRxiv 2020.08.17.254896; doi: https://doi.org/10.1101/2020.08.17.254896
+
+
