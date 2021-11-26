@@ -33,7 +33,7 @@ def clean_pair(pair_list,seq):
             pair_list.remove(item)
     return pair_list
 #all_files = os.listdir('/data2/darren/experiment/ufold/data/bpRNAnew.nr500.canonicals/')
-#file_dir = '/data2/darren/experiment/SPOT-RNA/data/bpRNA_dataset-canonicals/TS0/'
+file_dir = '/data2/darren/experiment/SPOT-RNA/data/bpRNA_dataset-canonicals/TS0/'
 #file_dir = '/data2/darren/experiment/mxfold2/data/TrainSetA/' #'/data2/darren/experiment/SPOT-RNA/data/bpRNA_dataset-canonicals/TS0/'
 #file_dir = '/data2/darren/experiment/ufold/data/bpRNAnew.nr500.canonicals/'
 #file_dir = 'pdb_bpseq/'
@@ -122,8 +122,8 @@ if __name__=='__main__':
         
     print(len(all_files_list))
     #pdb_file.close()
-    pdb.set_trace()
+    #pdb.set_trace()
     #cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/data/bpRNA_TrainSetA_128.cPickle","wb"))
     #cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/data/bpRNA_new20201015.cPickle","wb"))
     #cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/data/pdb_from_yx_test.cPickle","wb"))
-    cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/data/pdb_from_yx_672.cPickle","wb"))
+    cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/upload_github/datanew/TS0.cPickle","wb"))
