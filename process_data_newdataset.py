@@ -33,14 +33,14 @@ def clean_pair(pair_list,seq):
             pair_list.remove(item)
     return pair_list
 #all_files = os.listdir('/data2/darren/experiment/ufold/data/bpRNAnew.nr500.canonicals/')
-file_dir = '/data2/darren/experiment/SPOT-RNA/data/bpRNA_dataset-canonicals/TS0/'
+#file_dir = '/data2/darren/experiment/SPOT-RNA/data/bpRNA_dataset-canonicals/TS0/'
 #file_dir = '/data2/darren/experiment/mxfold2/data/TrainSetA/' #'/data2/darren/experiment/SPOT-RNA/data/bpRNA_dataset-canonicals/TS0/'
 #file_dir = '/data2/darren/experiment/ufold/data/bpRNAnew.nr500.canonicals/'
 #file_dir = 'pdb_bpseq/'
 #file_dir = 'BPSeqFiles_PDB/'
 if __name__=='__main__':
 
-    file_dir = sys.argv[1]#'BPSeqFiles_PDB/'
+    file_dir = sys.argv[1]+'/'#'BPSeqFiles_PDB/'
     all_files = os.listdir(file_dir)
     random.seed(4)
     random.shuffle(all_files)
