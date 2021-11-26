@@ -163,7 +163,7 @@ def model_eval_all_test(contact_net,test_generator):
             #    print(result_nc_tmp[0])
         #seq_lens_list += list(seq_lens)
 
-    pdb.set_trace()
+    #pdb.set_trace()
     #print(np.mean(run_time))
     
     #dot_ct_file = open('results/dot_ct_file.txt','w')
@@ -203,7 +203,7 @@ def main():
     torch.multiprocessing.set_sharing_strategy('file_system')
     torch.cuda.set_device(2)
     
-    pdb.set_trace()
+    #pdb.set_trace()
     
     config_file = args.config
     test_file = args.test_files
@@ -224,9 +224,9 @@ def main():
     #MODEL_SAVED = '/data2/darren/experiment/ufold/models_ckpt/final_model/unet_train_on_TR0_33.pt'
     #MODEL_SAVED = '/data2/darren/experiment/ufold/models_ckpt/final_model/unet_train_on_RNAlign_49.pt'
     if test_file not in ['TS1','TS2','TS3']:
-        MODEL_SAVED = 'models/unet_train_on_merge_alldata_98.pt'    
+        MODEL_SAVED = 'models/ufold_train.pt'    
     else:
-        MODEL_SAVED = 'models/ufold_train_on_pdb_contrafold_pdbfinetune_99.pt'
+        MODEL_SAVED = 'models/ufold_train_pdbfinetune.pt'
     #MODEL_SAVED = '/data2/darren/experiment/ufold/models_ckpt/final_model/unet_train_on_TR0andMXUnet_99.pt'
     #MODEL_SAVED = '/data2/darren/experiment/ufold/models_ckpt/final_model/unet_train_on_TR0bpnewOriuseMXUnet_96.pt'
     #MODEL_SAVED = '/data2/darren/experiment/ufold/models_ckpt/final_model/unet_train_on_TR0_extract_99.pt'
@@ -288,7 +288,7 @@ def main():
     #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA_TR0_andsim_mutate_extract_train.cPickle')
     seq_len = test_data.data_y.shape[-2]
     print('Max seq length ', seq_len)
-    pdb.set_trace()
+    #pdb.set_trace()
     
     # using the pytorch interface to parallel the data generation and model training
     params = {'batch_size': BATCH_SIZE,
