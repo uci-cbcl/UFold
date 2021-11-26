@@ -22,7 +22,7 @@ import collections
 
 args = get_args()
 if args.nc:
-    from e2efold.postprocess import postprocess_new_nc as postprocess
+    from ufold.postprocess import postprocess_new_nc as postprocess
 else:
     from ufold.postprocess import postprocess_new as postprocess
 
