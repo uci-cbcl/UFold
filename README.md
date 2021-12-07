@@ -71,6 +71,12 @@ After running the above example, you will genarate the example output as the fol
 
 If the above output pops up, then you have succeeded installed our software.  
 
+We have also provided an offline version of our prediction tool for users to directly predict RNA secondary structure using their own fasta sequences. All they need to do is put their fasta file (named input.txt) into data folder. And then run the following codes:  
+<pre><code>$ python ufold_predict.py --nc False
+--nc: optional parameter, whether to predict non-canonical or nor, default is False.
+</code></pre>  
+After running the above command, you will get the output ct file,bpseq file, and figures in the results folder.
+
 ## Citation
 
 If you use our tool, please cite our work: 
