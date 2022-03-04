@@ -102,7 +102,7 @@ def train(contact_net,train_merge_generator,epoches_first):
                 #torch.save(contact_net.state_dict(),  f'models_ckpt/final_model/unet_train_on_RNAlign_restart_{epoch}.pt')
                 #torch.save(contact_net.state_dict(),  f'models_ckpt/final_model/unet_train_on_merge_alldata_{epoch}.pt')
                 #torch.save(contact_net.state_dict(),  f'models_ckpt/final_model/unet_train_on_TR0bpnewOriuseMXUnet_{epoch}.pt')
-            torch.save(contact_net.state_dict(),  f'../models_ckpt/final_model/for_servermodel/tmp/ufold_train_onalldata_{epoch}.pt')
+            torch.save(contact_net.state_dict(),  f'../ufold_train_{epoch}.pt')
 
 def main():
     torch.cuda.set_device(1)
