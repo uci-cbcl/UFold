@@ -39,7 +39,7 @@ def train(contact_net,train_merge_generator,epoches_first):
     # test_script()
     #t1 = subprocess.getstatusoutput('awk \'{if($1 ~ /^>/)print}\' /data2/darren/experiment/ufold/data/rnastralign_all/rnastralign_train_no_redundant.seq.cdhit')
     #all_cdhit_names = t1[1].split('\n')
-    pdb.set_trace()
+    #pdb.set_trace()
     steps_done = 0
     print('start training...')
     # There are three steps of training
@@ -116,7 +116,7 @@ def main():
     print('Here is the configuration of this run: ')
     print(config)
     
-    pdb.set_trace()
+    #pdb.set_trace()
     
     os.environ["CUDA_VISIBLE_DEVICES"]= config.gpu
     
@@ -142,7 +142,7 @@ def main():
     # loading the rna ss data, the data has been preprocessed
     # 5s data is just a demo data, which do not have pseudoknot, will generate another data having that
     
-    pdb.set_trace()
+    #pdb.set_trace()
     train_data_list = []
     for file_item in train_files:
         print('Loading dataset: ',file_item)
@@ -152,7 +152,7 @@ def main():
             train_data_list.append(RNASSDataGenerator('data/',file_item+'.cPickle'))
     print('Data Loading Done!!!')
     #train_data = RNASSDataGenerator('data/{}/'.format(data_type), 'train.pickle', False)
-    pdb.set_trace()
+    #pdb.set_trace()
     '''
     train_data_pdb = RNASSDataGenerator('data/','pdb_from_yx_672.cPickle',False)
     #train_data_TR0 = RNASSDataGenerator('data/','bpRNA_TR0_ori.cPickle',False)
@@ -181,7 +181,7 @@ def main():
     # val_set = Dataset(val_data)
     #train_merge = Dataset_FCN_merge(train_data,train_data_sim,train_data_TR0)
     #train_merge = Dataset_FCN_merge(train_data,train_data_sim,train_data_TR0)
-    pdb.set_trace()
+    #pdb.set_trace()
     #train_merge = Dataset_FCN_merge([train_data,train_data_TR0_addsim,train_data_pdb])
     #train_merge = Dataset_FCN_merge([train_data,train_data_TR0_addsim,train_data_pdb])
     #train_merge = Dataset_FCN_merge([train_data,train_data_TR0_addsim,train_data_pdb,test_data_archive,test_data_TS0,test_data_bpnew,test_data_TS1,test_data_TS2,test_data_TS3])
@@ -189,7 +189,7 @@ def main():
     train_merge = Dataset_FCN_merge(train_data_list)
     train_merge = Dataset_FCN_merge(train_data_list)
     train_merge_generator = data.DataLoader(train_merge, **params)
-    pdb.set_trace()
+    #pdb.set_trace()
     
     contact_net = FCNNet(img_ch=17)
     # contact_net = nn.DataParallel(contact_net, device_ids=[3, 4])
