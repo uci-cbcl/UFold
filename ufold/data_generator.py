@@ -606,7 +606,10 @@ class Dataset_Cut_concat_new_merge_multi(data.Dataset):
   def __init__(self, data_list):
         'Initialization'
         self.data2 = data_list[0]
-        self.data = self.merge_data(data_list)
+        if len(data_list) > 1:
+            self.data = self.merge_data(data_list)
+        else:
+            self.data = self.data2
 
   def __len__(self):
         'Denotes the total number of samples'
