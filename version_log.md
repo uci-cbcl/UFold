@@ -1,5 +1,8 @@
 # Version 
 
+## v1.1+ 2022/03
+The UFold v1.1+ version could allow for either lower or upper case sequence input of both DNA and RNA format('ATCG' or 'AUCG'). 
+
 ## v1.1 2021/12
 The UFold v1.1 could adopt longer sequences with less than 1000nt. We also provide offline version for predicting RNA secondary structure, please check it out. 
 
