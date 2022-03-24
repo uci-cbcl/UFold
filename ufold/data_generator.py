@@ -223,7 +223,7 @@ class RNASSDataGenerator_input(object):
                     'seq ss_label length name pairs')
         input_file = open(os.path.join(data_dir, '%s.txt' % self.split),'r').readlines()
         self.data_name = np.array([itm.strip()[1:] for itm in input_file if itm.startswith('>')])
-        self.seq = [itm.strip().replace('T','U') for itm in input_file if itm.upper().startswith(('A','U','C','G'))]
+        self.seq = [itm.strip().upper().replace('T','U') for itm in input_file if itm.upper().startswith(('A','U','C','G','T'))]
         self.len = len(self.seq)
         self.seq_length = np.array([len(item) for item in self.seq])
         self.data_x = np.array([self.one_hot_600(item) for item in self.seq])
