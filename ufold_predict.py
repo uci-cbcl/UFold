@@ -292,7 +292,7 @@ def main():
     #model_path = '/data2/darren/experiment/ufold/models_ckpt/'.format(model_type, data_type,d)
     epoches_first = config.epoches_first
 
-    MODEL_SAVED = 'models/unet_train_on_merge_alldata_98.pt'
+    MODEL_SAVED = 'models/ufold_train_alldata.pt'
 
     device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 
