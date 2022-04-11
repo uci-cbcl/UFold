@@ -241,6 +241,7 @@ class RNASSDataGenerator_input(object):
             one_hot_matrix_600 = np.zeros((600,4))
         else:
             one_hot_matrix_600 = np.zeros((600,4))
+            # one_hot_matrix_600 = np.zeros((len(seq_item),4))
         one_hot_matrix_600[:len(seq_item),] = feat
         return one_hot_matrix_600
 
