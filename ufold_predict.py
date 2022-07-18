@@ -137,7 +137,6 @@ def type_pairs(pairs, sequence):
 
 def model_eval_all_test(contact_net, test_generator):
     device = get_device()
-    contact_net.to(device)
     contact_net.train()
     seq_lens_list = list()
     batch_n = 0
@@ -151,6 +150,9 @@ def model_eval_all_test(contact_net, test_generator):
         seq_embedding_batch = torch.Tensor(seq_embeddings.float()).to(device)
         seq_ori = torch.Tensor(seq_ori.float()).to(device)
         with torch.no_grad():
+
+            import ipdb; ipdb.set_strace()
+
             pred_contacts = contact_net(seq_embedding_batch)
 
         # only post-processing without learning
