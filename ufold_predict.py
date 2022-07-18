@@ -137,6 +137,7 @@ def type_pairs(pairs, sequence):
 
 def model_eval_all_test(contact_net, test_generator):
     device = get_device()
+    contact_net.to(device)
     contact_net.train()
     seq_lens_list = list()
     batch_n = 0
@@ -254,7 +255,7 @@ def main():
     # TODO(john): looks like sequences >600 bps are truncated to 600
     test_data = RNASSDataGenerator_input("data/", "input")
 
-    params = {"batch_size": BATCH_SIZE, "shuffle": True, "num_workers": 6, "drop_last": True}
+    params = {"batch_size": BATCH_SIZE, "shuffle": True, "num_workers": 4, "drop_last": True}
 
     test_set = Dataset_FCN(test_data)
     test_generator = data.DataLoader(test_set, **params)
