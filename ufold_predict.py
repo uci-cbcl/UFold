@@ -151,7 +151,7 @@ def model_eval_all_test(contact_net, test_generator):
         seq_ori = torch.Tensor(seq_ori.float()).to(device)
         with torch.no_grad():
 
-            import ipdb; ipdb.set_strace()
+            import ipdb; ipdb.set_trace()
 
             pred_contacts = contact_net(seq_embedding_batch)
 
