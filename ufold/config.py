@@ -21,7 +21,7 @@ def get_config_from_json(json_file):
 def process_config(jsonfile):
     config_dict = get_config_from_json(jsonfile)
     config = munch.Munch(config_dict)
-    config.test = munch.Munch(config.test)
+    
     return config
 
 
