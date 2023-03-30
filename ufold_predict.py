@@ -294,7 +294,7 @@ def main():
 
     MODEL_SAVED = 'models/ufold_train_alldata.pt'
 
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     seed_torch()
         
