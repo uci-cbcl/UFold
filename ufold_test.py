@@ -201,7 +201,7 @@ def model_eval_all_test(contact_net,test_generator):
 
 def main():
     torch.multiprocessing.set_sharing_strategy('file_system')
-    torch.cuda.set_device(2)
+    torch.cuda.set_device(0)
     
     #pdb.set_trace()
     
@@ -254,7 +254,7 @@ def main():
     
     
     # if gpu is to be used
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
     seed_torch()
     
