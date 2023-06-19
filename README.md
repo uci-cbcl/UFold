@@ -1,5 +1,6 @@
 <img src='https://github.com/uci-cbcl/UFold/blob/main/ufold/UFold_logonew1.png' width=300 height=200>
 
+Erik's test input!
 
 ## UFold: Fast and Accurate RNA Secondary Structure Prediction with Deep Learning
 
