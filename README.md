@@ -2,7 +2,7 @@
 
 # News 🌟
 
-We have update our backend-server to v1.3 and provide a CPU-based version of [UFold-CPU](http://146.56.237.198:3838/UFold/) online platform. Please check it out!!!
+We have update our backend-server to v1.3 and provide a CPU-based version of [UFold-CPU](https://ufold.ics.uci.edu) online platform. Please check it out!!!
 
 
 ## UFold: Fast and Accurate RNA Secondary Structure Prediction with Deep Learning
