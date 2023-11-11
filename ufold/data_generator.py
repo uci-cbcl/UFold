@@ -10,6 +10,7 @@ from random import shuffle
 import torch
 from itertools import permutations, product
 import pdb
+from collections import defaultdict
 
 import math
 
@@ -876,45 +877,37 @@ def l_mask(inp, seq_len):
     mask[:, temp] = 0
     return np.triu(mask, 2)
 
-def paired(x,y):
-    if x == [1,0,0,0] and y == [0,1,0,0]:
-        return 2
-    elif x == [0,0,0,1] and y == [0,0,1,0]:
-        return 3
-    elif x == [0,0,0,1]and y == [0,1,0,0]:
-        return 0.8
-    elif x == [0,1,0,0] and y == [1,0,0,0]:
-        return 2
-    elif x == [0,0,1,0] and y == [0,0,0,1]:
-        return 3
-    elif x == [0,1,0,0]and y == [0,0,0,1]:
-        return 0.8
-    else:
-        return 0
+def creatmat(data, device=None):
+    if device==None:
+        device = torch.device('cuda:0') if torch.cuda.is_available() else torch.device('cpu')
 
-def creatmat(data):
-    mat = np.zeros([len(data),len(data)])
-    for i in range(len(data)):
-        for j in range(len(data)):
-            coefficient = 0
-            for add in range(30):
-                if i - add >= 0 and j + add <len(data):
-                    score = paired(list(data[i - add]),list(data[j + add]))
-                    if score == 0:
-                        break
-                    else:
-                        coefficient = coefficient + score * Gaussian(add)
-                else:
-                    break
-            if coefficient > 0:
-                for add in range(1,30):
-                    if i + add < len(data) and j - add >= 0:
-                        score = paired(list(data[i + add]),list(data[j - add]))
-                        if score == 0:
-                            break
-                        else:
-                            coefficient = coefficient + score * Gaussian(add)
-                    else:
-                        break
-            mat[[i],[j]] = coefficient
-    return mat
+    with torch.no_grad():
+        data = ''.join(['AUCG'[list(d).index(1)] for d in data])
+        paired = defaultdict(int, {'AU':2, 'UA':2, 'GC':3, 'CG':3, 'UG':0.8, 'GU':0.8})
+
+        mat = torch.tensor([[paired[x+y] for y in data] for x in data]).to(device)
+        n = len(data)
+
+        i, j = torch.meshgrid(torch.arange(n).to(device), torch.arange(n).to(device), indexing=None)
+        t = torch.arange(30).to(device)
+        m1 = torch.where((i[:, :, None] - t >= 0) & (j[:, :, None] + t < n), mat[torch.clamp(i[:,:,None]-t, 0, n-1), torch.clamp(j[:,:,None]+t, 0, n-1)], 0)
+        m1 *= torch.exp(-0.5*t*t)
+
+        m1_0pad = torch.nn.functional.pad(m1, (0, 1))
+        first0 = torch.argmax((m1_0pad==0).to(int), dim=2)
+        to0indices = t[None,None,:]>first0[:,:,None]
+        m1[to0indices] = 0
+        m1 = m1.sum(dim=2)
+
+        t = torch.arange(1, 30).to(device)
+        m2 = torch.where((i[:, :, None] + t < n) & (j[:, :, None] - t >= 0), mat[torch.clamp(i[:,:,None]+t, 0, n-1), torch.clamp(j[:,:,None]-t, 0, n-1)], 0)
+        m2 *= torch.exp(-0.5*t*t)
+
+        m2_0pad = torch.nn.functional.pad(m2, (0, 1))
+        first0 = torch.argmax((m2_0pad==0).to(int), dim=2)
+        to0indices = torch.arange(29).to(device)[None,None,:]>first0[:,:,None]
+        m2[to0indices] = 0
+        m2 = m2.sum(dim=2)
+        m2[m1==0] = 0
+
+        return (m1+m2).to(torch.device('cpu'))
