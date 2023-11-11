@@ -10,11 +10,11 @@ We have update our backend-server to v1.3 and provide a CPU-based version of [UF
 For many RNA molecules, the secondary structure is essential for the correct function of the RNA. Predicting RNA secondary structure from nucleotide sequences is a long-standing problem in genomics, but the prediction performance has reached a plateau over time. Traditional RNA secondary structure prediction algorithms are primarily based on thermodynamic models through free energy minimization, which imposes strong prior assumptions and is slow to run. Here we propose a deep learning-based method, called UFold, for RNA secondary structure prediction, trained directly on annotated data and base-pairing rules. Ufold proposes a novel image-like representation of RNA sequences, which can be efficiently processed by Fully Convolutional Networks (FCNs). UFold improves upon previous models, with approximately 10~30% improvement over traditional thermodynamic models and up to 27% improvement over other learning-based methods in terms of base-pair prediction accuracy on an RNA structure prediction benchmark dataset. UFold is also fast with an inference time of about 160ms per sequence up to 1600bp in length.
 
 ## Prerequisites
---python >= 3.6.6
+--python >= 3.11
 
---torch >= 1.4 with cudnn >=10.0
+--torch >= 2.0.1 with cudnn >=11.8
 
---[munch](https://pypi.org/project/munch/2.0.2/)
+--[munch](https://pypi.org/project/munch/4.0.0/)
 
 --[subprocess](https://docs.python.org/3/library/subprocess.html)
 
@@ -29,8 +29,14 @@ git clone https://github.com/uci-cbcl/UFold.git
 
 Navigate to the root of this repo and setup the conda environment.
 
+### !!!Noted: 
+
+### 1. Please change prefix path into your own path in the last line of UFold.yaml file.
+
+### 2. Please match your python version ,cuda version and torch version with the package.
+
 ```
-conda env create -f UFold.yml
+conda env create -f UFold.yaml
 ```
 
 Activate conda environment.
