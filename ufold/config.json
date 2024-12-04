@@ -1,7 +1,7 @@
 {
 	"gpu": "3",
 	"u_net_d": 10,
-	"BATCH_SIZE": 1,
+	"BATCH_SIZE": 8,
 	"batch_size_stage_1": 1,
 	"OUT_STEP": 100,
 	"LOAD_MODEL": true,
