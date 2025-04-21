@@ -1,0 +1,5 @@
+*.pickle
+*.pt
+*.cPickle
+*.fa
+*.pyc
