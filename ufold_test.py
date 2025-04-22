@@ -19,7 +19,7 @@ from ufold.data_generator import RNASSDataGenerator, Dataset
 from ufold.data_generator import Dataset_Cut_concat_new_canonicle as Dataset_FCN
 from ufold.data_generator import Dataset_Cut_concat_new_merge_two as Dataset_FCN_merge
 import collections
-
+RNA_SS_data = collections.namedtuple('RNA_SS_data','seq ss_label length name pairs')
 args = get_args()
 if args.nc:
     from ufold.postprocess import postprocess_new_nc as postprocess
@@ -69,7 +69,7 @@ def get_ct_dict_fast(predict_matrix,batch_num,ct_dict,dot_file_dict,seq_embeddin
 # randomly select one sample from the test set and perform the evaluation
 
 def model_eval_all_test(contact_net,test_generator):
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     contact_net.train()
     result_no_train = list()
     result_no_train_shift = list()
@@ -200,7 +200,8 @@ def model_eval_all_test(contact_net,test_generator):
 
 
 def main():
-    torch.multiprocessing.set_sharing_strategy('file_system')
+    # torch.multiprocessing.set_sharing_strategy('file_system')
+    torch.multiprocessing.set_start_method("spawn", force=True)
     torch.cuda.set_device(0)
     
     #pdb.set_trace()
@@ -319,7 +320,7 @@ def main():
     
     #pdb.set_trace()
     print('==========Start Loading==========')
-    contact_net.load_state_dict(torch.load(MODEL_SAVED,map_location='cuda:1'))
+    contact_net.load_state_dict(torch.load(MODEL_SAVED,map_location='cuda:0'))
     print('==========Finish Loading==========')
     # contact_net = nn.DataParallel(contact_net, device_ids=[3, 4])
     contact_net.to(device)
@@ -337,7 +338,7 @@ if __name__ == '__main__':
     """
     See module-level docstring for a description of the script.
     """
-    RNA_SS_data = collections.namedtuple('RNA_SS_data','seq ss_label length name pairs')
+    # RNA_SS_data = collections.namedtuple('RNA_SS_data','seq ss_label length name pairs')
     main()
 
 

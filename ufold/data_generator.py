@@ -41,7 +41,7 @@ class RNASSDataGenerator(object):
             self.data = self.upsampling_data_new()
         self.data_x = np.array([instance[0] for instance in self.data])
         self.data_y = np.array([instance[1] for instance in self.data])
-        self.pairs = np.array([instance[-1] for instance in self.data])
+        self.pairs = [instance[-1] for instance in self.data] #np.array([instance[-1] for instance in self.data])
         #pdb.set_trace()
         self.seq_length = np.array([instance[2] for instance in self.data])
         self.len = len(self.data)
@@ -888,7 +888,8 @@ def creatmat(data, device=None):
         mat = torch.tensor([[paired[x+y] for y in data] for x in data]).to(device)
         n = len(data)
 
-        i, j = torch.meshgrid(torch.arange(n).to(device), torch.arange(n).to(device), indexing=None)
+        # i, j = torch.meshgrid(torch.arange(n).to(device), torch.arange(n).to(device), indexing=None)
+        i, j = torch.meshgrid(torch.arange(n).to(device), torch.arange(n).to(device), indexing='ij')
         t = torch.arange(30).to(device)
         m1 = torch.where((i[:, :, None] - t >= 0) & (j[:, :, None] + t < n), mat[torch.clamp(i[:,:,None]-t, 0, n-1), torch.clamp(j[:,:,None]+t, 0, n-1)], 0)
         m1 *= torch.exp(-0.5*t*t)
